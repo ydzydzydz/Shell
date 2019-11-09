@@ -34,7 +34,7 @@ z=$[Num/2+1]
 
 # 计算需要打印"  "和"* "的个数
 xy (){
-	if [ $n -le $z ]; then
+	if [ $i -le $z ]; then
 		let x+=2; let y-=1
 	else
 		let x-=2; let y+=1
@@ -52,7 +52,7 @@ echo_kong (){
 
 # 打印"* "
 echo_xing (){ 
-	for f in `seq $x`
+	for i in `seq $x`
 	do
 		echo -n "* "
 		sleep 0.2
@@ -66,7 +66,7 @@ huanhang (){
 
 # 打印
 echo "---------------------------"
-for n in `seq $Num`
+for i in `seq $Num`
 do
 	xy
 	echo_kong
