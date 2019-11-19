@@ -57,6 +57,11 @@ SmallNum (){
 	tput cup $Height3 $Width3; echo $Hour:$Minuite:$Second
 }
 
+# 打印标题
+Tittle (){
+	tput cup $[Height2-3] $Width2 2> /dev/null; echo -e "\033[32m$Text\033[0m"
+}
+
 # 计算光标位置
 GuangBiao (){
 	Width=`stty size | awk '{print $2}'`     # 获取终端宽度
@@ -87,9 +92,9 @@ PrintfDown (){
 		GuangBiao
 		clear    # 清屏
 		if [ "$i" -eq 0 ]; then
-			tput cup $[Height2-3] $Width2 2> /dev/null; echo -e "\033[32m倒计时结束\033[0m"
+			Text="倒计时结束"; Tittle
 		else
-			tput cup $[Height2-3] $Width2 2> /dev/null; echo -e "\033[32m倒计时:[${Fen} 分钟]\033[0m" 
+			Text="倒计时:[$Fen 分钟]"; Tittle
 			echo
 		fi
 			SetHMS
@@ -107,14 +112,14 @@ PrintfUp (){
 		clear
         let Miao=$i
 		SetHMS
-		tput cup $[Height2-3] $Width2 2> /dev/null; echo -e "\033[32m计时:[${i} 秒钟]\033[0m"
+		Text="计时:[${i} 秒钟]"; Tittle
 		Display
 		sleep 1
 		let i++
 	done
 }
 
-# 当前时钟
+# 当前时间
 PrintfNow () {
 	while :
 	do
@@ -124,7 +129,7 @@ PrintfNow () {
 		i=`echo "$Hour*3600+$Minuite*60+$Second" | bc`		
 		let Miao=$i
 		SetHMS
-		tput cup $[Height2-3] $Width2 2> /dev/null; echo -e "\033[32m[时钟]\033[0m"
+		Text="[当前时间]"; Tittle
 		Display
 		sleep 1
 		let i++
@@ -151,7 +156,7 @@ SelectModule (){
         PrintfNow
         tput cnorm;;
     *)
-        echo -e "\033[31m请输入正确选项[1.倒计时 2.计时器 3.时钟]\033[0m"
+        echo -e "\033[31m1.倒计时\t 2.计时器\t 3.时钟\033[0m"
     esac
 }
 
