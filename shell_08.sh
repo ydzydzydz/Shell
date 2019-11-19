@@ -8,7 +8,7 @@
 
 # 计算[时、分、秒]
 SetHMS (){
-    Ling=0
+	Ling=0
 	if [ "$Miao" -ge 3600 ];then 
 		let Hour=$[i/3600]; let Minuite=$[i/60%60]; let Second=$[$i%60]
 	else
@@ -41,15 +41,15 @@ row9=("000000000" "111111111" "222222222" "333333333" "       44" "555555555" "6
 
 # 打印数组
 BigNum (){
-tput cup $[Height2+0] $Width2; echo -e "\033[31m${row1[$Hour01]}" "${row1[$Hour02]}" "${row1["10"]}" "${row1[$Minuite01]}" "${row1[$Minuite02]}" "${row1["10"]}" "${row1[$Second01]}" "${row1[$Second02]}\033[0m"
-tput cup $[Height2+1] $Width2; echo -e "\033[31m${row2[$Hour01]}" "${row2[$Hour02]}" "${row2["10"]}" "${row2[$Minuite01]}" "${row2[$Minuite02]}" "${row2["10"]}" "${row2[$Second01]}" "${row2[$Second02]}\033[0m"
-tput cup $[Height2+2] $Width2; echo -e "\033[31m${row3[$Hour01]}" "${row3[$Hour02]}" "${row3["10"]}" "${row3[$Minuite01]}" "${row3[$Minuite02]}" "${row3["10"]}" "${row3[$Second01]}" "${row3[$Second02]}\033[0m"
-tput cup $[Height2+3] $Width2; echo -e "\033[31m${row4[$Hour01]}" "${row4[$Hour02]}" "${row4["10"]}" "${row4[$Minuite01]}" "${row4[$Minuite02]}" "${row4["10"]}" "${row4[$Second01]}" "${row4[$Second02]}\033[0m"
-tput cup $[Height2+4] $Width2; echo -e "\033[31m${row5[$Hour01]}" "${row5[$Hour02]}" "${row5["10"]}" "${row5[$Minuite01]}" "${row5[$Minuite02]}" "${row5["10"]}" "${row5[$Second01]}" "${row5[$Second02]}\033[0m"
-tput cup $[Height2+5] $Width2; echo -e "\033[31m${row6[$Hour01]}" "${row6[$Hour02]}" "${row6["10"]}" "${row6[$Minuite01]}" "${row6[$Minuite02]}" "${row6["10"]}" "${row6[$Second01]}" "${row6[$Second02]}\033[0m"
-tput cup $[Height2+6] $Width2; echo -e "\033[31m${row7[$Hour01]}" "${row7[$Hour02]}" "${row7["10"]}" "${row7[$Minuite01]}" "${row7[$Minuite02]}" "${row7["10"]}" "${row7[$Second01]}" "${row7[$Second02]}\033[0m"
-tput cup $[Height2+7] $Width2; echo -e "\033[31m${row8[$Hour01]}" "${row8[$Hour02]}" "${row8["10"]}" "${row8[$Minuite01]}" "${row8[$Minuite02]}" "${row8["10"]}" "${row8[$Second01]}" "${row8[$Second02]}\033[0m"
-tput cup $[Height2+8] $Width2; echo -e "\033[31m${row9[$Hour01]}" "${row9[$Hour02]}" "${row9["10"]}" "${row9[$Minuite01]}" "${row9[$Minuite02]}" "${row9["10"]}" "${row9[$Second01]}" "${row9[$Second02]}\033[0m"
+	tput cup $[Height2+0] $Width2; echo -e "\033[31m${row1[$Hour01]}" "${row1[$Hour02]}" "${row1["10"]}" "${row1[$Minuite01]}" "${row1[$Minuite02]}" "${row1["10"]}" "${row1[$Second01]}" "${row1[$Second02]}\033[0m"
+	tput cup $[Height2+1] $Width2; echo -e "\033[31m${row2[$Hour01]}" "${row2[$Hour02]}" "${row2["10"]}" "${row2[$Minuite01]}" "${row2[$Minuite02]}" "${row2["10"]}" "${row2[$Second01]}" "${row2[$Second02]}\033[0m"
+	tput cup $[Height2+2] $Width2; echo -e "\033[31m${row3[$Hour01]}" "${row3[$Hour02]}" "${row3["10"]}" "${row3[$Minuite01]}" "${row3[$Minuite02]}" "${row3["10"]}" "${row3[$Second01]}" "${row3[$Second02]}\033[0m"
+	tput cup $[Height2+3] $Width2; echo -e "\033[31m${row4[$Hour01]}" "${row4[$Hour02]}" "${row4["10"]}" "${row4[$Minuite01]}" "${row4[$Minuite02]}" "${row4["10"]}" "${row4[$Second01]}" "${row4[$Second02]}\033[0m"
+	tput cup $[Height2+4] $Width2; echo -e "\033[31m${row5[$Hour01]}" "${row5[$Hour02]}" "${row5["10"]}" "${row5[$Minuite01]}" "${row5[$Minuite02]}" "${row5["10"]}" "${row5[$Second01]}" "${row5[$Second02]}\033[0m"
+	tput cup $[Height2+5] $Width2; echo -e "\033[31m${row6[$Hour01]}" "${row6[$Hour02]}" "${row6["10"]}" "${row6[$Minuite01]}" "${row6[$Minuite02]}" "${row6["10"]}" "${row6[$Second01]}" "${row6[$Second02]}\033[0m"
+	tput cup $[Height2+6] $Width2; echo -e "\033[31m${row7[$Hour01]}" "${row7[$Hour02]}" "${row7["10"]}" "${row7[$Minuite01]}" "${row7[$Minuite02]}" "${row7["10"]}" "${row7[$Second01]}" "${row7[$Second02]}\033[0m"
+	tput cup $[Height2+7] $Width2; echo -e "\033[31m${row8[$Hour01]}" "${row8[$Hour02]}" "${row8["10"]}" "${row8[$Minuite01]}" "${row8[$Minuite02]}" "${row8["10"]}" "${row8[$Second01]}" "${row8[$Second02]}\033[0m"
+	tput cup $[Height2+8] $Width2; echo -e "\033[31m${row9[$Hour01]}" "${row9[$Hour02]}" "${row9["10"]}" "${row9[$Minuite01]}" "${row9[$Minuite02]}" "${row9["10"]}" "${row9[$Second01]}" "${row9[$Second02]}\033[0m"
 }
 
 # 打印剩余时间
@@ -90,27 +90,27 @@ PrintfDown (){
 	for ((i=$Miao;i>=0;i--))
 	do
 		GuangBiao
-		clear    # 清屏
+		clear                                     # 清屏
 		if [ "$i" -eq 0 ]; then
 			Text="倒计时结束"; Tittle
 		else
 			Text="倒计时:[$Fen 分钟]"; Tittle
 			echo
 		fi
-			SetHMS
-			Display
-			sleep 1
+		SetHMS
+		Display
+		sleep 1
 	done
 }
 
 # 计时器
 PrintfUp (){
-    i=0
+	i=0
 	while :
 	do
 		GuangBiao
 		clear
-        let Miao=$i
+		let Miao=$i
 		SetHMS
 		Text="计时:[${i} 秒钟]"; Tittle
 		Display
@@ -138,26 +138,26 @@ PrintfNow () {
 
 # 选择模式
 SelectModule (){
-    read -p "[1.倒计时 2.计时器 3.时钟] 选择：" Select
-    case $Select in
-    1)
-        read -p "[？分钟倒计时]:" Fen          # 获取变量
-        Miao=`echo "scale=2; $Fen*60" | bc`  # 换算时间
-        Miao=${Miao%.*}                      # 截取整数
-        tput civis                           # 隐藏光标
-        PrintfDown                           # 打印输出
-        tput cnorm;;                         # 恢复光标
-    2)
-        tput civis
-        PrintfUp
-        tput cnorm;;
+	read -p "[1.倒计时 2.计时器 3.时钟] 选择：" Select
+	case $Select in
+	1)
+		read -p "[？分钟倒计时]:" Fen          # 获取变量
+		Miao=`echo "scale=2; $Fen*60" | bc`    # 换算时间
+		Miao=${Miao%.*}                        # 截取整数
+		tput civis                             # 隐藏光标
+		PrintfDown                             # 打印输出
+		tput cnorm;;                           # 恢复光标
+	2)
+		tput civis
+		PrintfUp
+		tput cnorm;;
 	3)
 		tput civis
-        PrintfNow
-        tput cnorm;;
-    *)
-        echo -e "\033[31m1.倒计时\t 2.计时器\t 3.时钟\033[0m"
-    esac
+		PrintfNow
+		tput cnorm;;
+	*)
+		echo -e "\033[31m1.倒计时\t 2.计时器\t 3.时钟\033[0m"
+	esac
 }
 
 SelectModule
