@@ -1,11 +1,13 @@
 #!/bin/bash
 
 #------------------------------------
-# 计时器 | 倒计时
+# 1.倒计时
+# 2.计时器
 #------------------------------------
 
 # 计算[时、分、秒]
 SetHMS (){
+    Ling=0
 	if [ "$Miao" -ge 3600 ];then 
 		let Hour=$[i/3600]; let Minuite=$[i/60%60]; let Second=$[$i%60]
 	else
@@ -66,7 +68,7 @@ GuangBiao (){
 	Height3=$[(Height-1)/2]
 }
 
-# 判断终端长宽
+# 判断终端长宽, 不同显示
 Display (){
 	if [ $Width2 -lt 0 ];then
 	 	SmallNum
@@ -77,7 +79,7 @@ Display (){
 	fi
 }
 
-# 循环打印
+# 倒计时
 PrintfDown (){
 	for ((i=$Miao;i>=0;i--))
 	do
@@ -95,7 +97,9 @@ PrintfDown (){
 	done
 }
 
+# 计时器
 PrintfUp (){
+    i=0
 	while :
 	do
 		GuangBiao
@@ -111,9 +115,9 @@ PrintfUp (){
 
 # 选择模式
 SelectModule (){
+    read -p "[1.倒计时 2.计时器] 选择：" Select
     case $Select in
     1)
-        Ling=0
         read -p "[？分钟倒计时]:" Fen          # 获取变量
         Miao=`echo "scale=2; $Fen*60" | bc`  # 换算时间
         Miao=${Miao%.*}                      # 截取整数
@@ -121,8 +125,6 @@ SelectModule (){
         PrintfDown                           # 打印输出
         tput cnorm;;                         # 恢复光标
     2)
-        Ling=0
-        i=0
         tput civis
         PrintfUp
         tput cnorm;;
@@ -131,5 +133,4 @@ SelectModule (){
     esac
 }
 
-read -p "[1.倒计时 2.计时器] 选择：" Select
 SelectModule
