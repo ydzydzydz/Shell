@@ -120,22 +120,10 @@ PrintfNow () {
 	do
 		GuangBiao
 		clear
-		Hour=`date +"%H"`
-		Minuite=`date +"%M"`
-		Second=`date +"%S"`
-		Ling=0
-		if [ "$Hour" -lt 10 ];then
-			Hour=$Ling$Hour
-		fi
-		if [ "$Minuite" -lt 10 ];then
-			Minuite=$Ling$Minuite
-		fi
-		if [ "$Second" -lt 10 ];then
-			Second=$Ling$Second
-		fi
-		Hour01=${Hour:0:1};Hour02=${Hour:1:1}
-		Minuite01=${Minuite:0:1};Minuite02=${Minuite:1:1}
-		Second01=${Second:0:1};Second02=${Second:1:1}
+		Hour=`date +"%H"`; Minuite=`date +"%M"`; Second=`date +"%S"`
+		i=`echo "$Hour*3600+$Minuite*60+$Second" | bc`		
+		let Miao=$i
+		SetHMS
 		tput cup $[Height2-3] $Width2 2> /dev/null; echo -e "\033[32m[时钟]\033[0m"
 		Display
 		sleep 1
