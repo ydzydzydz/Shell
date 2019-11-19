@@ -89,8 +89,8 @@ Display (){
 PrintfDown (){
 	for ((i=$Miao;i>=0;i--))
 	do
-		GuangBiao
 		clear                                     # 清屏
+		GuangBiao
 		if [ "$i" -eq 0 ]; then
 			Text="倒计时结束"; Tittle
 		else
@@ -108,8 +108,8 @@ PrintfUp (){
 	i=0
 	while :
 	do
-		GuangBiao
 		clear
+		GuangBiao
 		let Miao=$i
 		SetHMS
 		Text="计时:[${i} 秒钟]"; Tittle
@@ -123,13 +123,14 @@ PrintfUp (){
 PrintfNow () {
 	while :
 	do
-		GuangBiao
 		clear
+		GuangBiao
+		Date=`date +"%Y-%m-%d %A"`
 		Hour=`date +"%H"`; Minuite=`date +"%M"`; Second=`date +"%S"`
 		i=`echo "$Hour*3600+$Minuite*60+$Second" | bc`		
 		let Miao=$i
 		SetHMS
-		Text="[当前时间]"; Tittle
+		Text="[当前时间] $Date"; Tittle
 		Display
 		sleep 1
 		let i++
