@@ -6,7 +6,7 @@
 
 # 计算[时、分、秒]
 SetHMS (){
-	if [ $Fen -ge 60 ];then 
+	if [ $Miao -ge 3600 ];then 
 		let Hour=$[i/3600]; let Minuite=$[i/60%60]; let Second=$[$i%60]
 	else
 		let Hour=$[i/3600]; let Minuite=$[i/60]; let Second=$[$i%60]
@@ -96,8 +96,9 @@ Printf (){
 }
 
 Ling=0
-read -p "[倒计时？分钟]:" Fen   # 获取变量
-Miao=$[Fen*60]                # 换算时间
-tput civis                    # 隐藏光标
-Printf                        # 打印输出
-tput cnorm                    # 恢复光标
+read -p "[倒计时？分钟]:" Fen          # 获取变量
+Miao=`echo "scale=2; $Fen*60" | bc`  # 换算时间
+Miao=${Miao%.*}                      # 截取整数
+tput civis                           # 隐藏光标
+Printf                               # 打印输出
+tput cnorm                           # 恢复光标
