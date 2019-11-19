@@ -3,6 +3,7 @@
 #------------------------------------
 # 1.倒计时
 # 2.计时器
+# 3.时钟
 #------------------------------------
 
 # 计算[时、分、秒]
@@ -88,7 +89,7 @@ PrintfDown (){
 		if [ "$i" -eq 0 ]; then
 			tput cup $[Height2-3] $Width2 2> /dev/null; echo -e "\033[32m倒计时结束\033[0m"
 		else
-			tput cup $[Height2-3] $Width2 2> /dev/null; echo -e "\033[32m倒计时:[${Fen}分钟]\033[0m" 
+			tput cup $[Height2-3] $Width2 2> /dev/null; echo -e "\033[32m倒计时:[${Fen} 分钟]\033[0m" 
 			echo
 		fi
 			SetHMS
@@ -106,7 +107,36 @@ PrintfUp (){
 		clear
         let Miao=$i
 		SetHMS
-		tput cup $[Height2-3] $Width2 2> /dev/null; echo -e "\033[32m计时:[${i}秒钟]\033[0m"
+		tput cup $[Height2-3] $Width2 2> /dev/null; echo -e "\033[32m计时:[${i} 秒钟]\033[0m"
+		Display
+		sleep 1
+		let i++
+	done
+}
+
+# 当前时钟
+PrintfNow () {
+	while :
+	do
+		GuangBiao
+		clear
+		Hour=`date +"%H"`
+		Minuite=`date +"%M"`
+		Second=`date +"%S"`
+		Ling=0
+		if [ "$Hour" -lt 10 ];then
+			Hour=$Ling$Hour
+		fi
+		if [ "$Minuite" -lt 10 ];then
+			Minuite=$Ling$Minuite
+		fi
+		if [ "$Second" -lt 10 ];then
+			Second=$Ling$Second
+		fi
+		Hour01=${Hour:0:1};Hour02=${Hour:1:1}
+		Minuite01=${Minuite:0:1};Minuite02=${Minuite:1:1}
+		Second01=${Second:0:1};Second02=${Second:1:1}
+		tput cup $[Height2-3] $Width2 2> /dev/null; echo -e "\033[32m[时钟]\033[0m"
 		Display
 		sleep 1
 		let i++
@@ -115,7 +145,7 @@ PrintfUp (){
 
 # 选择模式
 SelectModule (){
-    read -p "[1.倒计时 2.计时器] 选择：" Select
+    read -p "[1.倒计时 2.计时器 3.时钟] 选择：" Select
     case $Select in
     1)
         read -p "[？分钟倒计时]:" Fen          # 获取变量
@@ -128,8 +158,12 @@ SelectModule (){
         tput civis
         PrintfUp
         tput cnorm;;
+	3)
+		tput civis
+        PrintfNow
+        tput cnorm;;
     *)
-        echo -e "\033[31m请输入正确选项[1.倒计时 2.计时器]\033[0m"
+        echo -e "\033[31m请输入正确选项[1.倒计时 2.计时器 3.时钟]\033[0m"
     esac
 }
 
