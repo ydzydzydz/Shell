@@ -133,7 +133,6 @@ PrintfNow () {
 		Text="[当前时间] $Date"; Tittle
 		Display
 		sleep 1
-		let i++
 	done
 }
 
@@ -142,7 +141,7 @@ SelectModule (){
 	read -p "[1.倒计时 2.计时器 3.时钟] 选择：" Select
 	case $Select in
 	1)
-		read -p "[？分钟倒计时]:" Fen          # 获取变量
+		read -p "[？分钟倒计时]:" Fen            # 获取变量
 		Miao=`echo "scale=2; $Fen*60" | bc`    # 换算时间
 		Miao=${Miao%.*}                        # 截取整数
 		tput civis                             # 隐藏光标
