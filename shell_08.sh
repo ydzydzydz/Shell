@@ -93,6 +93,7 @@ PrintfDown (){
 		GuangBiao
 		if [ "$i" -eq 0 ]; then
 			Text="倒计时结束"; Tittle
+#			spd-say "Time is over" 2> /dev/null          # 声音提醒
 		else
 			Text="倒计时:[$Fen 分钟]"; Tittle
 			echo
@@ -132,15 +133,25 @@ PrintfNow () {
 		SetHMS
 		Text="[当前时间] $Date"; Tittle
 		Display
+#		[ $Minuite == 00 ] && [ $Second == 00 ] && spd-say "$Hour o'clock now" 2> /dev/null      # 整点报时
 		sleep 1
 	done
 }
+
+# 声音提醒
+#Sound (){
+#	read -p "安装声音提醒软件[y/n]" sound
+#	if [ $sound == y ]; then
+#		yum -y install speech-dispatcher &> /dev/null || sudo apt-get install speech-dispatcher &> /dev/null
+#	fi
+#}
 
 # 选择模式
 SelectModule (){
 	read -p "[1.倒计时 2.计时器 3.时钟] 选择：" Select
 	case $Select in
 	1)
+#		Sound
 		read -p "[？分钟倒计时]:" Fen            # 获取变量
 		Miao=`echo "scale=2; $Fen*60" | bc`    # 换算时间
 		Miao=${Miao%.*}                        # 截取整数
@@ -152,6 +163,7 @@ SelectModule (){
 		PrintfUp
 		tput cnorm;;
 	3)
+#		Sound
 		tput civis
 		PrintfNow
 		tput cnorm;;
