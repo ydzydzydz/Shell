@@ -35,6 +35,7 @@ if [ $? -eq 0 ];then
 else
 	echo "${Warn} 未开启SELinux"
 fi
+
 # 防火墙放行端口
 which firewall-cmd &> /dev/null
 if [ $? -eq 0 ];then
@@ -63,3 +64,4 @@ echo ""
 
 # 重启ssh服务
 systemctl restart sshd && echo "${Info} ssh服务重启成功" || echo "${Error} ssh服务重启失败"
+echo "${Info} ssh -p $NewPort user@hostname"
