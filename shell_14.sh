@@ -51,7 +51,7 @@ else
 fi
 
 # 后悔药
-echo -e "${Warn} 即将重启ssh服务"
+echo -e "${Info} 即将重启ssh服务"
 echo -ne "${Warn} "
 Wait=5
 for i in {1..5}
