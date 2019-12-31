@@ -16,5 +16,6 @@
 | 011  | [shell_11.sh](./shell_11.sh) |        lvs 调度健康检查        | 2019-11-21 |
 | 012  | [shell_12.sh](./shell_12.sh) |       Nginx 服务管理脚本       | 2019-11-26 |
 | 013  | [shell_13.sh](./shell_13.sh) |    检测 Linux 系统发行版本     | 2019-12-01 |
-| 014  | [shell_14.sh](./shell_14.sh) |    CentOS 7 修改 ssh 端口     | 2019-12-17 |
+| 014  | [shell_14.sh](./shell_14.sh) |     CentOS 7 修改 ssh 端口     | 2019-12-17 |
+| 015  | [shell_15.sh](./shell_15.sh) |        克隆 kvm 虚拟机         | 2019-12-31 |
 
