@@ -16,7 +16,7 @@ check_log (){
 	done
 }
 
-if [ -e $log ]; then
+if [ ! -e $log ]; then
 	echo -e "\033[31m日志文件不存在\033[0m"
 else
 	check_log
