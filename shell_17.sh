@@ -7,6 +7,7 @@
 while :
 do
 	clear && tput civis
+	trap "tput cnorm && exit" 2
 	echo -e "-------------------------------"
 	echo -e "连接数: \t\t `netstat -nat | grep ":80" | grep EST | wc -l`"
 	echo -e "并发数: \t\t `netstat -nat | grep ":80" | wc -l`"

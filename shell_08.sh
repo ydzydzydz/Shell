@@ -172,4 +172,5 @@ SelectModule (){
 	esac
 }
 
+trap "tput cnorm && exit" 2
 SelectModule

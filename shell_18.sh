@@ -10,6 +10,7 @@ check_log (){
 	while :
 	do
 		tput civis
+		trap "tput cnorm && exit" 2
 		clear
 		awk '{ip[$1]++}END{for (i in ip){print ip[i],"\t\t",i}}' $log | sort -nr | awk 'BEGIN{print "Sort","\t","TIME","\t\t","IP\n""-----------------------------------------"}{print NR,"\t",$0}' | head -n 12
 		sleep 1
