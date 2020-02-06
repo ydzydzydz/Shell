@@ -83,7 +83,7 @@ speed_table (){
 
 check_eth $1
 tput civis                     # 隐藏光标
-trap "tput cnorm && exit" 2    # 回复光标后退出脚本
+trap "tput cnorm && exit" 2    # 恢复光标后退出脚本
 
 while :
 do
