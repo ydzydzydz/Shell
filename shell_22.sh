@@ -16,8 +16,8 @@ check_eth (){
 
 set_pre (){
 	if [ -z "$rx_pre" ]; then
-		rx_pre=`ifconfig $1 | awk '/RX packets/{print $3}'`
-		tx_pre=`ifconfig $1 | awk '/TX packets/{print $3}'`
+		rx_pre=`ifconfig $1 | awk '/RX packets/{print $5}'`
+		tx_pre=`ifconfig $1 | awk '/TX packets/{print $5}'`
 	else
 		rx_pre=$rx_next
 		tx_pre=$tx_next
@@ -25,8 +25,8 @@ set_pre (){
 }
 
 set_speed (){
-	rx_next=`ifconfig $1 | awk '/RX packets/{print $3}'`
-	tx_next=`ifconfig $1 | awk '/TX packets/{print $3}'`
+	rx_next=`ifconfig $1 | awk '/RX packets/{print $5}'`
+	tx_next=`ifconfig $1 | awk '/TX packets/{print $5}'`
 	rx_speed=$[rx_next-rx_pre]	
 	tx_speed=$[tx_next-tx_pre]
 }
@@ -48,10 +48,10 @@ echo_tx (){
 		echo -e "| 上传速度 $up \t| ${tx_speed}B/s"; tput cup 4 31; echo "|"
 	elif [ $tx_speed -lt 1048576 ]; then
 		tx_speed=`echo "scale=2; ${tx_speed}/1024" | bc`
-		echo -e "| 上传速度 $up \t| ${rx_speed}K/s"; tput cup 4 31; echo "|"
+		echo -e "| 上传速度 $up \t| ${tx_speed}K/s"; tput cup 4 31; echo "|"
 	elif [ $tx_speed -lt 1073741824 ]; then
 		tx_speed=`echo "scale=2; ${tx_speed}/1048576" | bc`
-		echo -e "| 上传速度 $up \t| ${rx_speed}M/s"; tput cup 4 31; echo "|"
+		echo -e "| 上传速度 $up \t| ${tx_speed}M/s"; tput cup 4 31; echo "|"
 	fi
 }
 
