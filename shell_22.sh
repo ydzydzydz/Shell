@@ -6,11 +6,11 @@
 
 check_eth (){
 	if [ $# -eq 0 ]; then
-		echo -e "输入正确网卡名\n`ifconfig | awk -F: '/flags=/{print $1}'`" && exit 1
+		echo "$0 `ifconfig | awk -F: '/flags=/{print $1}'`" | sed ':a;N;$!ba;s%\n%/%g' && exit 1
 	fi
 	ifconfig $1 &> /dev/null
 	if [ $? -ne 0 ]; then
-		echo -e "输入正确网卡名\n`ifconfig | awk -F: '/flags=/{print $1}'`" && exit 1
+		echo "$0 `ifconfig | awk -F: '/flags=/{print $1}'`" | sed ':a;N;$!ba;s%\n%/%g' && exit 1
 	fi
 }
 
