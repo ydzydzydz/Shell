@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#--------------------------------------------------------
+# Use awk instead of wc to count words, bytes, and lines
+#--------------------------------------------------------
+
 version=0.0.1
 
 usage (){
@@ -18,10 +22,9 @@ Author:	ZHUANGZHUANG
 Date:	2020-02-09
 Feat:	Combine short options
 EOF
-exit 1
 }
 
-file=`getopt -o clhwv --long lines,bytes,words,help,version -n "$0" -- "$@"`
+file=`getopt -o chwvl --long lines,bytes,words,help,version -n "$0" -- "$@"`
 
 eval set -- "${file}"
 
