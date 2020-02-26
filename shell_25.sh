@@ -96,7 +96,7 @@ show_menu (){
 	done
 }
 
-start_choice (){
+run_choice (){
 	if [[ $choice == 1 ]]; then
 		clear
 		if check_up 0; then
@@ -114,4 +114,4 @@ start_choice (){
 }
 
 show_menu
-start_choice
+run_choice
