@@ -27,7 +27,8 @@
 | 022  | [shell_22.sh](./shell_22.sh) |            实时查看网速             | 2020-02-06 |
 | 023  | [shell_23.sh](./shell_23.sh) |      一键部署 Zabbix 服务监控       | 2020-02-06 |
 | 024  | [shell_24.sh](./shell_24.sh) |   使用 awk 统计字符数.单词数行数    | 2020-02-10 |
-| 025  | [shell_25.sh](./shell_25.sh) | 部署 web 页面 | 2020-02-27 |
-| 026  | [shell_26.sh](./shell_26.sh) | 打印进度条（echo） | 2020-03-24 |
-| 027  | [shell_27.sh](./shell_27.sh) | 打印进度条（printf）| 2020-03-24 |
+| 025  | [shell_25.sh](./shell_25.sh) |            部署 web 页面            | 2020-02-27 |
+| 026  | [shell_26.sh](./shell_26.sh) |         打印进度条（echo）          | 2020-03-24 |
+| 027  | [shell_27.sh](./shell_27.sh) |        打印进度条（printf）         | 2020-03-24 |
+| 028  | [shell_28.sh](./shell_28.sh) |           dialog example            | 2020-05-14 |
 
