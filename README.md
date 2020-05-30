@@ -32,4 +32,5 @@
 | 027  | [shell_27.sh](./shell_27.sh) |        打印进度条（printf）         | 2020-03-24 |
 | 028  | [shell_28.sh](./shell_28.sh) |           dialog example            | 2020-05-14 |
 | 029  | [shell_29.sh](./shell_29.sh) |              查询天气               | 2020-05-30 |
+| 030  | [shell_30.sh](./shell_30.sh) |   使用 wsl 开启 windows 上帝模式    | 2020-05-30 |
 
