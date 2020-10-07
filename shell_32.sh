@@ -8,7 +8,7 @@
 devices=`ifconfig | awk -F": flags" '/flags/ {print $1}'`
 
 devices_max_length=`ifconfig | awk -F":" '/flags/ {if(length($1)>max_length)max_length=length($1)} END{if(max_length>7){print max_length}else{print "7"}}'`
-netmask_max_length=`ifconfig | awk '/netmask / {if (length($2)>max_length) max_length=length($2)} END{if(max_length>7){print max_length}else{print "7"}}'`
+netmask_max_length=`ifconfig | awk '/netmask / {if (length($4)>max_length) max_length=length($4)} END{if(max_length>7){print max_length}else{print "7"}}'`
 ipv4_max_length=`ifconfig | awk '/inet / {if (length($2)>max_length) max_length=length($2)} END{if(max_length>4){print max_length}else{print "4"}}'`
 ipv6_max_length=`ifconfig | awk '/inet6/ {if (length($2)>max_length) max_length=length($2)} END{if(max_length>4){print max_length}else{print "4"}}'`
 
