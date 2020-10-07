@@ -33,5 +33,6 @@
 | 028  | [shell_28.sh](./shell_28.sh) |           dialog example            | 2020-05-14 |
 | 029  | [shell_29.sh](./shell_29.sh) |              查询天气               | 2020-05-30 |
 | 030  | [shell_30.sh](./shell_30.sh) |   使用 wsl 开启 windows 上帝模式    | 2020-05-30 |
-| 031  | [shell_31.sh](./shell_31.sh) |    expect + ssh + sudo 脚本练习     | 2020-05-30 |
+| 031  | [shell_31.sh](./shell_31.sh) |    expect + ssh + sudo 脚本练习     | 2020-09-12 |
+| 032  | [shell_32.sh](./shell_32.sh) |            printf 脚本练习          | 2020-10-07 |
 
