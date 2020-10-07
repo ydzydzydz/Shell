@@ -94,7 +94,7 @@ printf_table_2(){
 
 case $1 in 
 	("-h"|"--help")
-		printf_usage $0
+		printf_usage ${0##*/}
 		;;
 	("-g")
 		printf_table
