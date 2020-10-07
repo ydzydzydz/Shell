@@ -18,6 +18,19 @@ length2=""; for i in `seq $ipv4_max_length`; do length2=${length2}${length0}; do
 length3=""; for i in `seq $netmask_max_length`; do length3=${length3}${length0}; done
 length4=""; for i in `seq $ipv6_max_length`; do length4=${length4}${length0}; done
 
+printf_usage(){
+	printf "\n"
+	printf "Usage: $1 [OPTION]\n\n"
+	printf "%-4s %-16s %s\n" " " "-h, --help" "display this help and exit"
+	printf "%-4s %-16s %s\n" " " "-g"         "display all devices ip like a table"
+	printf "%-4s %-16s %s\n" " " "-G"         "vertical display all devices ip like a table"
+	printf "\n"
+	printf "%-8s %s\n" "Desc:"   "display all devices ip like a table"
+	printf "%-8s %s\n" "Author:" "ZHUANGZHUANG <mail@zhuangzhuang.ml>"
+	printf "%-8s %s\n" "Date:"   "2020-10-07"
+	printf "\n"
+}
+
 printf_devices_ip(){
 	for i in $devices; do
 		ipv4=`ifconfig $i | awk '/inet / {print $2}'`
@@ -49,11 +62,13 @@ printf_table(){
 
 printf_table_2(){
 	max_length=$netmask_max_length
-	if [[ $max_length -lt $ipv4_max_length  ]]; then
+	if [[ $max_length -lt $ipv4_max_length ]]; then
 		max_length=$ipv4_max_length
-	elif [[ $max_length -lt $ipv6_max_length  ]]; then
+	fi
+	if [[ $max_length -lt $ipv6_max_length ]]; then
 		max_length=$ipv6_max_length
 	fi
+
 	length5=""; for i in `seq $max_length`; do length5=${length5}${length0}; done
 
 	for i in $devices; do
@@ -75,11 +90,16 @@ printf_table_2(){
 		printf "%s %-7s %s %-${max_length}s %s %s\n" "+" "-------" "+" "$length5" "+"
 		printf "\n"
 	done
-
 }
 
 case $1 in 
+	("-h"|"--help")
+		printf_usage $0
+		;;
 	("-g")
+		printf_table
+		;;
+	("-G")
 		printf_table_2	
 		;;
 	(*)
