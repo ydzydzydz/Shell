@@ -20,10 +20,15 @@ length4=""; for i in `seq $ipv6_max_length`; do length4=${length4}${length0}; do
 
 printf_usage(){
 	printf "\n"
-	printf "Usage: $1 [OPTION]\n\n"
-	printf "%-4s %-16s %s\n" " " "-h, --help" "display this help and exit"
-	printf "%-4s %-16s %s\n" " " "-g"         "display all devices ip like a table"
-	printf "%-4s %-16s %s\n" " " "-G"         "vertical display all devices ip like a table"
+	printf "Usage: $1 [OPTION] [INTERFACE]\n\n"
+	printf "%-4s %-18s %s\n" " " "-4, --ipv4"      "only display ipv4 like a table"
+	printf "%-4s %-18s %s\n" " " "-6, --ipv6"      "only display ipv6 like a table"
+	printf "%-4s %-18s %s\n" " " "-a, --all"       "display all devices ip info like a table"
+	printf "%-4s %-18s %s\n" " " "-i, --interface" "only display the specified interface ip ($1 -i eth0 lo ...)"
+	printf "%-4s %-18s %s\n" " " "-l, --list"      "display all devices"
+	printf "%-4s %-18s %s\n" " " "-h, --help"      "display this help and exit"
+	printf "%-4s %-18s %s\n" " " "-g"              "display all devices ip like a table"
+	printf "%-4s %-18s %s\n" " " "-G"              "vertical display all devices ip like a table"
 	printf "\n"
 	printf "%-8s %s\n" "Desc:"   "display all devices ip like a table"
 	printf "%-8s %s\n" "Author:" "ZHUANGZHUANG <mail@zhuangzhuang.ml>"
@@ -44,8 +49,6 @@ printf_devices_ip(){
 			printf "%s %-${devices_max_length}s %s %-${ipv4_max_length}s %s %-${netmask_max_length}s %s %-${ipv6_max_length}s %s\n" "|" "$i" "|" "$ipv4" "|" "$netmask" "|" "$ipv6" "|"
 		fi
 	done
-
-
 }
 
 printf_table(){
@@ -92,11 +95,82 @@ printf_table_2(){
 	done
 }
 
+printf_ipv4(){
+	printf "%s %-${devices_max_length}s %s %-${ipv4_max_length}s %s\n" "+" "$length1" "+" "$length2" "+"
+	printf "%s %-${devices_max_length}s %s %-${ipv4_max_length}s %s\n" "|" "DEVICES" "|" "IPV4" "|"
+	printf "%s %-${devices_max_length}s %s %-${ipv4_max_length}s %s\n" "+" "$length1" "+" "$length2" "+"
+	for i in $devices; do
+		ipv4=`ifconfig $i | awk '/inet / {print $2}'`
+		printf "%s %-${devices_max_length}s %s %-${ipv4_max_length}s %s\n" "|" "$i" "|" "$ipv4" "|"
+	done
+	printf "%s %-${devices_max_length}s %s %-${ipv4_max_length}s %s\n" "+" "$length1" "+" "$length2" "+"
+}
+
+printf_ipv6(){
+	printf "%s %-${devices_max_length}s %s %-${ipv6_max_length}s %s\n" "+" "$length1" "+" "$length4" "+"
+	printf "%s %-${devices_max_length}s %s %-${ipv6_max_length}s %s\n" "|" "DEVICES" "|" "IPV6" "|"
+	printf "%s %-${devices_max_length}s %s %-${ipv6_max_length}s %s\n" "+" "$length1" "+" "$length4" "+"
+	for i in $devices; do
+		ipv6=`ifconfig $i | awk '/inet6/ {print $2}'`
+		if [[ `ifconfig $i | awk '/inet6/ {i++} END{print i}'` -gt 1  ]]; then
+			for x in $ipv6; do
+				printf "%s %-${devices_max_length}s %s %-${ipv6_max_length}s %s\n" "|" "$i" "|" "$x" "|"
+			done
+		else
+			printf "%s %-${devices_max_length}s %s %-${ipv6_max_length}s %s\n" "|" "$i" "|" "$ipv6" "|"
+		fi
+	done
+	printf "%s %-${devices_max_length}s %s %-${ipv6_max_length}s %s\n" "+" "$length1" "+" "$length4" "+"
+}
+
+printf_devices(){
+	printf "%s %-${devices_max_length}s %s\n" "+" "$length1" "+"
+	printf "%s %-${devices_max_length}s %s\n" "|" "DEVICES" "|"
+	printf "%s %-${devices_max_length}s %s\n" "+" "$length1" "+"
+	for i in $devices; do
+		printf "%s %-${devices_max_length}s %s\n" "|" "$i" "|"
+	done
+	printf "%s %-${devices_max_length}s %s\n" "+" "$length1" "+"
+}
+
+printf_interface(){
+	printf "%s %-${devices_max_length}s %s %-${ipv4_max_length}s %s %-${netmask_max_length}s %s %-${ipv6_max_length}s %s\n" "+" "${length1}" "+" "${length2}" "+" "${length3}" "+" "${length4}" "+"
+	printf "%s %-${devices_max_length}s %s %-${ipv4_max_length}s %s %-${netmask_max_length}s %s %-${ipv6_max_length}s %s\n" "|" "DEVICES" "|" "IPV4" "|" "NETMASK" "|" "IPV6" "|"
+	printf "%s %-${devices_max_length}s %s %-${ipv4_max_length}s %s %-${netmask_max_length}s %s %-${ipv6_max_length}s %s\n" "+" "${length1}" "+" "${length2}" "+" "${length3}" "+" "${length4}" "+"
+	while [ $# != 1 ];do
+		shift
+		`ifconfig $1 &> /dev/null` || continue
+		ipv4=`ifconfig $1 | awk '/inet / {print $2}'`
+		ipv6=`ifconfig $1 | awk '/inet6/ {print $2}'`
+		netmask=`ifconfig $1 | awk '/netmask / {print $4}'`
+		if [[ `ifconfig $1 | awk '/inet6/ {i++} END{print i}'` -gt 1 ]]; then
+			for x in $ipv6; do
+				printf "%s %-${devices_max_length}s %s %-${ipv4_max_length}s %s %-${netmask_max_length}s %s %-${ipv6_max_length}s %s\n" "|" "$1" "|" "$ipv4" "|" "$netmask" "|" "$x" "|"
+			done
+		else
+			printf "%s %-${devices_max_length}s %s %-${ipv4_max_length}s %s %-${netmask_max_length}s %s %-${ipv6_max_length}s %s\n" "|" "$1" "|" "$ipv4" "|" "$netmask" "|" "$ipv6" "|"
+		fi
+	done
+	printf "%s %-${devices_max_length}s %s %-${ipv4_max_length}s %s %-${netmask_max_length}s %s %-${ipv6_max_length}s %s\n" "+" "${length1}" "+" "${length2}" "+" "${length3}" "+" "${length4}" "+"
+}
+
 case $1 in 
+	("-4"|"--ipv4")
+		printf_ipv4
+		;;
+	("-6"|"--ipv6")
+		printf_ipv6
+		;;
+	("-l"|"--list")
+		printf_devices
+		;;
+	("-i"|"--interface")
+		printf_interface $@
+		;;
 	("-h"|"--help")
 		printf_usage ${0##*/}
 		;;
-	("-g")
+	("-g"|"-a"|"--all")
 		printf_table
 		;;
 	("-G")
@@ -105,3 +179,5 @@ case $1 in
 	(*)
 		printf_table
 esac
+
+
