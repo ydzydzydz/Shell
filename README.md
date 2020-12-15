@@ -34,6 +34,8 @@
 | 029  | [shell_29.sh](./shell_29.sh) |              查询天气               | 2020-05-30 |
 | 030  | [shell_30.sh](./shell_30.sh) |   使用 wsl 开启 windows 上帝模式    | 2020-05-30 |
 | 031  | [shell_31.sh](./shell_31.sh) |    expect + ssh + sudo 脚本练习     | 2020-09-12 |
-| 032  | [shell_32.sh](./shell_32.sh) |            printf 脚本练习          | 2020-10-07 |
+| 032  | [shell_32.sh](./shell_32.sh) |           printf 脚本练习           | 2020-10-07 |
 | 033  | [shell_33.sh](./shell_33.sh) |        十六进制转换 IP 地址         | 2020-10-07 |
+| 034  | [shell_34.sh](./shell_34.sh) |           select 脚本练习           | 2020-12-15 |
+| 035  | [shell_35.sh](./shell_35.sh) |           dialog 脚本练习           | 2020-12-15 |
 
