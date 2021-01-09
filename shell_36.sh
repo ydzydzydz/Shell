@@ -25,7 +25,7 @@ run_command(){
 			echo >&3	# 补回FD3的回车符
 		} &
 	done
-	wait				# 等待所有线程结束再退出脚本
+	wait				# 等待所有线程结束
 	exec 3>&-			# 关闭FD3
 }
 
