@@ -38,4 +38,5 @@
 | 033  | [shell_33.sh](./shell_33.sh) |        十六进制转换 IP 地址         | 2020-10-07 |
 | 034  | [shell_34.sh](./shell_34.sh) |           select 脚本练习           | 2020-12-15 |
 | 035  | [shell_35.sh](./shell_35.sh) |           dialog 脚本练习           | 2020-12-15 |
+| 036  | [shell_36.sh](./shell_36.sh) |        shell 多线程脚本练习         | 2020-12-15 |
 
