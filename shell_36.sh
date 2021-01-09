@@ -2,6 +2,8 @@
 
 #-------------------------
 # Shell 多线程脚本
+# 执行脚本后，运行如下命令，查看最大线程数
+# [ -f ip_list  ] && watch -d 'for ip in $(cat ip_list); do ps -aux | grep $ip | grep -v grep ; done | sort -n | uniq'
 #-------------------------
 
 config_thread(){
@@ -17,26 +19,42 @@ config_thread(){
 
 run_command(){
 	all_num=$1
-	for num in $(seq -w "${all_num}"); do
-		read -u3		# 从FD3中去掉一个回车符，控制线程数量
+	for i in $(seq "$all_num"); do
+		echo 192.168.1.$i >> ip_list
+	done
+
+	for ip in $(cat ip_list); do
+		read -u3 		# 从FD3中去掉一个回车符，控制线程数量
 		{
-			echo "${num}"	# 执行命令
-			sleep 2		# 模拟执行命令的时间
+			ping -c 20 -W 1 "$ip" &> /dev/null 
+			if [ $? -eq 0 ];then
+				echo -e "[\033[32msuccess\033[0m] $ip" 
+			else
+				echo -e "[\033[31mfailure\033[0m] $ip" 1>&2
+			fi
 			echo >&3	# 补回FD3的回车符
 		} &
 	done
 	wait				# 等待所有线程结束
 	exec 3>&-			# 关闭FD3
+
+	rm -rf ip_list
+}
+
+print_runtime(){
+	echo
+	echo "+----------+-------------------+"
+	echo "|开始时间: |$start_time|"
+	echo "|结束时间: |$end_time|"
+	echo "+----------+-------------------+"
 }
 
 #-----------------------------------------------------
 
 start_time=$(date "+%Y-%m-%d %H:%M:%S")
-
+trap "rm -rf ip_list; exit" 2		# Ctrl + c 时，删除ip_list
 config_thread 5
-run_command 1000
-
+run_command 20
 end_time=$(date "+%Y-%m-%d %H:%M:%S")
 
-echo -e "开始时间: $start_time"
-echo -e "结束时间: $end_time"
+print_runtime
