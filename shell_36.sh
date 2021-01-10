@@ -3,7 +3,12 @@
 #-------------------------
 # Shell 多线程脚本
 # 执行脚本后，运行如下命令，查看最大线程数
-# [ -f ip_list  ] && watch -d 'for ip in $(cat ip_list); do ps -aux | grep $ip | grep -v grep ; done | sort -n | uniq'
+# watch -t -n 1 'if [ -f ip_list   ]; then 
+# 	ps aux | head -n 1; 
+# 	for ip in $(cat ip_list); do ps -aux | grep $ip | grep -v grep ; done | sort | uniq; 
+# 	for i in $(seq $(stty size | awk '"'"'{print $2}'"'"')); do echo -n "-"; done; 
+# 	echo "线程数为: $(for ip in $(cat ip_list); do ps -aux | grep $ip | grep -v grep ; done | sort | uniq | wc -l)"
+# fi'
 #-------------------------
 
 config_thread(){
