@@ -16,7 +16,7 @@ check_ip(){
 			FIELD2=$(echo $IP | cut -d. -f 2)
 			FIELD3=$(echo $IP | cut -d. -f 3)
 			FIELD4=$(echo $IP | cut -d. -f 4)
-			if [ $FIELD1 -le 255 -a $FIELD2 -le 255 -a $FIELD3 -le 255 -a $FIELD4 -le 255 ]; then
+			if [ $FIELD1 -gt 0 -a $FIELD1 -le 255 -a $FIELD2 -le 255 -a $FIELD3 -le 255 -a $FIELD4 -le 255 ]; then
 				echo -e "\033[1;32m输入的IP地址合法\033[0m"
 				break
 			else
