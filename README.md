@@ -39,4 +39,5 @@
 | 034  | [shell_34.sh](./shell_34.sh) |           select 脚本练习           | 2020-12-15 |
 | 035  | [shell_35.sh](./shell_35.sh) |           dialog 脚本练习           | 2020-12-15 |
 | 036  | [shell_36.sh](./shell_36.sh) |        shell 多线程脚本练习         | 2020-12-15 |
+| 037  | [shell_37.sh](./shell_37.sh) |          检查IP 地址合法性          | 2021-01-13 |
 
