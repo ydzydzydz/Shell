@@ -18,10 +18,14 @@ awk_lastb () {
 	column -t | sort -nrk 2
 }
 
+err_msg () {
+	echo -e "\033[31m$@\033[0m"
+}
+
 #############################################################################################
 
 if [ "$UID" -ne 0 ]; then
-	echo -e "\033[31m请使用root账户运行此脚本\033[0m"
+	err_msg "请使用 root 账户运行此脚本"
 fi
 
 case $1 in 
@@ -35,7 +39,7 @@ case $1 in
 		if [ -n "$2" ];then
 			LIMIT=$2
 			if [[ ! $LIMIT -gt 0 ]]; then
-				echo -e "\033[31m请输入正确数字\033[0m"
+				err_msg "请输入正确数字"
 				exit 1
 			fi
 		else 
@@ -47,3 +51,5 @@ case $1 in
 		$0 -h
 		;;
 esac
+
+exit 0
