@@ -48,7 +48,7 @@ case $1 in
 		awk_lastb $LIMIT
 		;;
 	(*)
-		$0 -h
+		bash $0 -h
 		;;
 esac
 
