@@ -4,6 +4,7 @@ usage (){
 	printf "\n"
 	printf "Usage: ${0##*/} [OPTION]\n\n"
 	printf "%-4s %-18s %s\n" " " "-a, --all"	"显示所有登录失败的IP，次数"
+	printf "%-4s %-18s %s\n" " " "-c, --clear"	"清空所有lastb记录"
 	printf "%-4s %-18s %s\n" " " "-l, --limit"	"显示所有登录失败次数大于指定值的IP"
 	printf "%-4s %-18s %s\n" " " " "		"默认显示登录失败次数大于100的IP"
 	printf "%-4s %-18s %s\n" " " "-h, --help"	"显示脚本帮助信息"
@@ -35,6 +36,9 @@ case $1 in
 		;;
 	("-a"|"--all")
 		awk_lastb 0
+		;;
+	("-c"|"--clear")
+		echo > /var/log/btmp
 		;;
 	("-l"|"--limit")
 		if [ -n "$2" ];then
