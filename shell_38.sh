@@ -26,11 +26,12 @@ awk_lastb (){
 	}' | \
 	column -t | sort -nrk 2 > $OUTPUT
 	if [[ "$(cat $OUTPUT | wc -l)" -eq 0 ]]; then
+		rm -rf $OUTPUT
 		err_msg "没有匹配到记录"
 	else
 		cat $OUTPUT
+		rm -rf $OUTPUT
 	fi
-	rm -rf $OUTPUT
 }
 
 block_ip (){
