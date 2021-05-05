@@ -14,22 +14,23 @@ usage (){
 
 awk_lastb (){
 	LIMIT=$1
+	OUTPUT=$(mktemp output.XXXXXX)
 	lastb | awk '{print $3}' | \
 	egrep "([0-9]{1,3}.){3}[0-9]{1,3}" | \
 	awk -v awkLimit="$LIMIT" '{ip[$1]++} END {
-		if (NR > 0){
-			for (i in ip){
-				if (ip[i] >= awkLimit){
-					print i, ip[i]
-				} else {
-					print "没有匹配到记录"
-				}
+		for (i in ip){
+			if (ip[i] >= awkLimit) {
+				print i, ip[i]
 			}
-		} else {
-			print "没有匹配到记录"
-		}
+		} 
 	}' | \
-	column -t | sort -nrk 2
+	column -t | sort -nrk 2 > $OUTPUT
+	if [[ "$(cat $OUTPUT | wc -l)" -eq 0 ]]; then
+		err_msg "没有匹配到记录"
+	else
+		cat $OUTPUT
+	fi
+	rm -rf $OUTPUT
 }
 
 block_ip (){
