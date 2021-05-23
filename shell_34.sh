@@ -32,6 +32,7 @@ select selection in \
 	"$(echo_menu 31 'Exit program')" 
 do
 	clear
+	# 从标准输入里读取的行，都会保存在变量REPLY里。
 	case $REPLY in
 		"1")
 			diskspace;;
