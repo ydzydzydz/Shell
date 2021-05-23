@@ -16,36 +16,34 @@ function memusage(){
 	cat /proc/meminfo
 }
 
-PS3="Enter option: "
+function echo_menu (){
+	echo -e "\033[$1m$2\033[0m"
+}
+
+STTY_SIZE=$(stty size | awk '{print $2}')
+PS3_1=$(for i in $(seq $STTY_SIZE); do echo -n "-"; done)
+PS3_2=$(echo -e "\n\033[32mEnter option: \033[0m")
+PS3=${PS3_1}${PS3_2}
 
 select selection in \
-	"Display disk sapce" \
-	"Display loged on users" \
-	"Display memory usage" \
-	"Exit program"
+	"$(echo_menu 36 'Display disk sapce')" 		\
+	"$(echo_menu 36 'Display loged on users')" 	\
+	"$(echo_menu 36 'Display memory usage')" 	\
+	"$(echo_menu 31 'Exit program')" 
 do
 	clear
-	case $selection in
-		"Display disk sapce")
+	case $REPLY in
+		"1")
 			diskspace;;
-		"Display loged on users")
+		"2")
 			whoseon;;
-		"Display memory usage")
+		"3")
 			memusage;;
-		"Exit program")
+		"4")
 			break;;
 		*)
 			echo "Sorry, wrong selection"
 	esac
 done
 
-
-
-
-
-
-
-
-
-
-
+exit 0
