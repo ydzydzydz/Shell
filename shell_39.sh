@@ -9,7 +9,7 @@
 # 2. test change_log
 #--------- change log end ----------
 
-sh_ver=v0.0.5
+sh_ver=v0.0.6
 sh_name=${0##*/}
 
 gh_user=ydzydzydz
@@ -31,7 +31,7 @@ warn (){
 print_change_log () {
 	change_log_start_line=$(wget -qO- https://raw.githubusercontent.com/${gh_user}/${gh_repo}/${gh_branch}/${sh_name} | grep -n "change log start" | awk -F: '{print $1}' | head -n 1)
 	change_log_end_line=$(wget -qO- https://raw.githubusercontent.com/${gh_user}/${gh_repo}/${gh_branch}/${sh_name} | grep -n "change log end" | awk -F: '{print $1}' | head -n 1)
-	wget -qO- https://raw.githubusercontent.com/${gh_user}/${gh_repo}/${gh_branch}/${sh_name} | sed -n "${change_log_start_line},${change_log_start_line}s/#//p" | while read change_log
+	wget -qO- https://raw.githubusercontent.com/${gh_user}/${gh_repo}/${gh_branch}/${sh_name} | sed -n "${change_log_start_line},${change_log_end_line}s/#//p" | while read change_log
 	do
 		echo -e "$(info) $change_log"
 	done
