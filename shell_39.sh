@@ -9,7 +9,7 @@
 # 2. test change_log
 #--------- change log end ----------
 
-sh_ver=v0.0.6
+sh_ver=v0.0.7
 sh_name=${0##*/}
 
 gh_user=ydzydzydz
@@ -17,15 +17,15 @@ gh_repo=Shell
 gh_branch=master
 
 erro (){
-	echo -e "\033[31m[ERRO]\033[0m $(date "+%Y-%m-%d %H:%M:%S") - ${sh_name}:"
+	echo -e "\033[31m[ERRO]\033[0m $(date "+%F %T.%3N") - ${sh_name}:"
 }
 
 info (){
-	echo -e "\033[32m[INFO]\033[0m $(date "+%Y-%m-%d %H:%M:%S") - ${sh_name}:"
+	echo -e "\033[32m[INFO]\033[0m $(date "+%F %T.%3N") - ${sh_name}:"
 }
 
 warn (){
-	echo -e "\033[33m[INFO]\033[0m $(date "+%Y-%m-%d %H:%M:%S") - ${sh_name}:"
+	echo -e "\033[33m[WARN]\033[0m $(date "+%F %T.%3N") - ${sh_name}:"
 }
 
 print_change_log () {
